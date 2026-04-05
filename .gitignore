@@ -1,0 +1,4 @@
+# Credenciales (no subir al repositorio)
+config.local.php
+.env
+*.local.php
