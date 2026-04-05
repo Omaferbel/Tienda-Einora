@@ -99,6 +99,12 @@ git pull origin main
 2. `git add -A` → `git commit -m "mensaje"` → `git push`.
 3. Con webhook: el hosting actualiza solo; si no, **Deploy** en el panel o `git pull` por SSH.
 
+### No “ves” cambios en GitHub o en la web
+
+- En GitHub, mira **Commits** en la rama `main` (no solo la portada del repo).
+- Los cambios solo en `.md` no modifican la página pública PHP.
+- En **View latest build output**, mensajes como `nothing to commit, working tree clean` suelen indicar que el servidor **ya tenía** el último código (despliegue correcto, sin archivos nuevos que aplicar).
+
 ---
 
 *Documento alineado con la ayuda oficial de Hostinger sobre GIT y webhooks de auto-despliegue.*
