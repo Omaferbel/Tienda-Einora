@@ -11,13 +11,13 @@ Pequeño seguimiento de lo implementado y lo pendiente. Actualizar al cerrar cad
 - [x] Configuración local `config.local.php` + plantilla `config/config.example.php`.
 - [x] Conexión PDO (`includes/db.php`) y página de prueba (`index.php`).
 - [x] **Producción einora.com:** `schema.sql` importado; `public_html` vaciado y Git Hostinger recreado con **Directory** vacío; despliegue desde panel + `config.local.php`; sitio en raíz del dominio.
+- [x] **Autenticación:** sesiones, CSRF en formularios, `login.php` / `register.php` (solo clientes) / `logout.php`, `db()` singleton, `require_admin()`, panel stub `admin/index.php`. Admin semilla: **admin@einora.com** / **CambiarEstaClave1!**.
 
 ## Próximos pasos (orden sugerido)
 
-1. **Autenticación:** login / registro clientes, sesiones, middleware rol `admin` vs `customer`.
-2. **Admin:** CRUD productos, ajuste de stock, listado de pedidos y estados.
-3. **Tienda pública:** catálogo, ficha producto, carrito (sesión), checkout contraentrega (`payment_method` = `cod`).
-4. Pulido: CSRF en formularios críticos, mensajes de error amigables, imágenes de producto.
+1. **Admin:** CRUD productos, ajuste de stock, listado de pedidos y estados.
+2. **Tienda pública:** catálogo, ficha producto, carrito (sesión), checkout contraentrega (`payment_method` = `cod`).
+3. Pulido: más CSRF donde falte, mensajes de error, imágenes de producto.
 
 ## Notas
 
@@ -27,4 +27,4 @@ Pequeño seguimiento de lo implementado y lo pendiente. Actualizar al cerrar cad
 
 ---
 
-*Última actualización: 2026-04-05 — despliegue inicial verificado en einora.com*
+*Última actualización: 2026-04-06 — autenticación y panel admin inicial*

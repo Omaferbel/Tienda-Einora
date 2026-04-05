@@ -2,44 +2,48 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/includes/bootstrap.php';
+require_once __DIR__ . '/includes/auth.php';
+require_once __DIR__ . '/includes/layout.php';
+
 header('Content-Type: text/html; charset=utf-8');
 
+$user = current_user();
+
+$dbOk = false;
+$dbError = null;
+$userCount = 0;
 try {
-    $pdo = require __DIR__ . '/includes/db.php';
-    $stmt = $pdo->query('SELECT COUNT(*) AS c FROM users');
+    $stmt = db()->query('SELECT COUNT(*) AS c FROM users');
     $row = $stmt->fetch();
     $userCount = (int) ($row['c'] ?? 0);
-    $ok = true;
+    $dbOk = true;
 } catch (Throwable $e) {
-    $ok = false;
-    $errorMessage = $e->getMessage();
+    $dbError = $e->getMessage();
 }
-?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Einora — Tienda</title>
-    <style>
-        body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
-        .ok { color: #0a0; }
-        .err { color: #c00; }
-        code { background: #f4f4f4; padding: 0.15em 0.4em; border-radius: 4px; }
-    </style>
-</head>
-<body>
-    <h1>Tienda Einora</h1>
-    <?php if ($ok): ?>
-        <p class="ok">Conexión a la base de datos correcta.</p>
-        <p>Usuarios en <code>users</code>: <strong><?= htmlspecialchars((string) $userCount, ENT_QUOTES, 'UTF-8') ?></strong></p>
-        <p>Siguiente: catálogo público y panel admin (ver <code>AVANCES.md</code>).</p>
-        <p><small>Despliegue automático: <code>git push</code> → GitHub → Hostinger.</small></p>
-        <p><small class="ok">Prueba deploy 2026-04-06: si ves esta línea, el último <code>git push</code> llegó al hosting.</small></p>
-    <?php else: ?>
-        <p class="err">No se pudo conectar a la base de datos.</p>
-        <p><small><?= htmlspecialchars($errorMessage ?? '', ENT_QUOTES, 'UTF-8') ?></small></p>
-        <p>Comprueba <code>config.local.php</code> y que hayas importado <code>database/schema.sql</code>.</p>
-    <?php endif; ?>
-</body>
-</html>
+
+layout_start('Inicio', $user);
+
+$flashOk = flash_take('ok');
+$flashErr = flash_take('err');
+if ($flashOk) {
+    echo '<p class="flash ok">' . h($flashOk) . '</p>';
+}
+if ($flashErr) {
+    echo '<p class="flash err">' . h($flashErr) . '</p>';
+}
+
+if (!$dbOk) {
+    echo '<p class="err">No se pudo conectar a la base de datos.</p>';
+    echo '<p><small>' . h((string) $dbError) . '</small></p>';
+    echo '<p>Comprueba <code>config.local.php</code> y que hayas importado <code>database/schema.sql</code>.</p>';
+} else {
+    echo '<p class="ok">Conexión a la base de datos correcta.</p>';
+    if ($user && $user['role'] === 'admin') {
+        echo '<p>Usuarios en <code>users</code>: <strong>' . h((string) $userCount) . '</strong></p>';
+    }
+    echo '<p>Próximamente: <strong>catálogo público</strong> y flujo de compra (contraentrega).</p>';
+    echo '<p><small>Despliegue: <code>git push</code> → GitHub → Hostinger.</small></p>';
+}
+
+layout_end();
