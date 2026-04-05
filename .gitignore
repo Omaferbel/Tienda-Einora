@@ -2,3 +2,4 @@
 config.local.php
 .env
 *.local.php
+ssh-credentials.local.txt
