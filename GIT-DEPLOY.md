@@ -54,15 +54,41 @@ Si GitHub pide usuario/contraseña, usa un **Personal Access Token** como contra
 5. En hPanel → **GIT**: **borra** el repositorio configurado y **vuelve a crearlo** con el campo **Directory / Install path vacío**, misma URL y rama `main`. Vuelve a configurar el **webhook** en GitHub si Hostinger te da una URL nueva.
 6. Pulsa **Deploy** o haz un `git push` vacío (`git commit --allow-empty -m "redeploy"` y `git push`) para comprobar que ahora actualiza la raíz correcta.
 
-### Si pide carpeta vacía
+### Error: «Project directory is not empty»
 
-La primera vez Hostinger a veces exige que el destino esté vacío.
+Significa que la carpeta destino (**`public_html`**, si **Directory** está vacío) **no está vacía** (cuenta todo: carpetas, archivos ocultos como `.git` o `.htaccess`). **No** se soluciona poniendo un nombre al azar en **Directory** si lo que quieres es servir el sitio en la raíz del dominio.
 
-1. En **Administrador de archivos**, entra en `domains/einora.com/public_html`.
-2. **Descarga una copia** de `config.local.php` a tu PC (respaldo).
-3. Mueve el resto a una carpeta de respaldo (ej. `_backup_manual`) o bórralo si ya tienes todo en Git.
-4. Crea el repositorio GIT en el panel y despliega.
-5. Vuelve a **subir solo** `config.local.php` a `public_html`.
+**Solución recomendada:**
+
+1. Ve a **`domains/einora.com/`** (carpeta **padre** de `public_html`).
+2. Crea **`_respaldo_sitio`** (u otro nombre) **ahí**, al mismo nivel que `public_html`.
+3. Entra en **`public_html`**, selecciona **todo** y **muévelo** a **`_respaldo_sitio`**.
+4. Comprueba que **`public_html` quede totalmente vacía**.
+5. En **GIT → Create a New Repository**: URL, rama `main`, **Directory vacío** → **Create** / desplegar.
+6. Copia otra vez **`config.local.php`** desde `_respaldo_sitio` (o tu PC) dentro de **`public_html`**.
+7. Si Hostinger muestra webhook nuevo, actualízalo en GitHub.
+
+**No pongas el respaldo dentro de `public_html`**: si dentro queda una carpeta `_backup`, el directorio **sigue sin estar vacío**.
+
+### El formulario parece obligar «Directory»
+
+1. Primero **vacía `public_html`** como arriba; a menudo entonces el campo **sí puede ir vacío** y desaparece el error.
+2. Si con `public_html` vacía el interfaz **no acepta vacío**, prueba escribir **solo** `.` (punto). **No** escribas `public_html` (anida otra vez).
+3. Si sigue fallando, despliega con **SSH** sin el asistente del panel (con `public_html` vacía):
+
+```bash
+cd ~/domains/einora.com/public_html
+git clone https://github.com/Omaferbel/Tienda-Einora.git .
+```
+
+Luego sube **`config.local.php`**. Las actualizaciones: entra por SSH y `git pull origin main` (el webhook del panel no aplica si no usas GIT en hPanel).
+
+### Si pide carpeta vacía (resumen)
+
+1. Respalda `config.local.php`.
+2. Vacía **`public_html`** moviendo **todo** a **`domains/einora.com/_respaldo_sitio`**.
+3. Crea el repositorio GIT y despliega.
+4. Vuelve a poner **`config.local.php`** en `public_html`.
 
 ---
 
