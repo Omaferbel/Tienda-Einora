@@ -23,9 +23,13 @@ En **PowerShell** en la carpeta del proyecto:
 ```powershell
 cd e:\Cursor\Tienda
 git branch -M main
-git remote add origin https://github.com/TU_USUARIO/tienda-einora.git
+git remote add origin https://github.com/Omaferbel/Tienda-Einora.git
 git push -u origin main
 ```
+
+Si GitHub avisa que el repositorio se movió y muestra otra URL, alinéala con:
+
+`git remote set-url origin https://github.com/Omaferbel/Tienda-Einora.git`
 
 Si GitHub pide usuario/contraseña, usa un **Personal Access Token** como contraseña (Settings → Developer settings → Tokens).
 
