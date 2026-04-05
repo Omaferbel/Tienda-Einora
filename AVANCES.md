@@ -12,12 +12,13 @@ Pequeño seguimiento de lo implementado y lo pendiente. Actualizar al cerrar cad
 - [x] Conexión PDO (`includes/db.php`) y página de prueba (`index.php`).
 - [x] **Producción einora.com:** `schema.sql` importado; `public_html` vaciado y Git Hostinger recreado con **Directory** vacío; despliegue desde panel + `config.local.php`; sitio en raíz del dominio.
 - [x] **Autenticación:** sesiones, CSRF en formularios, `login.php` / `register.php` (solo clientes) / `logout.php`, `db()` singleton, `require_admin()`, panel stub `admin/index.php`. Admin semilla: **admin@einora.com** / **CambiarEstaClave1!**.
+- [x] **Admin productos:** listado (`admin/products.php`), alta/edición (`admin/product_form.php`), activar/desactivar, eliminar si no hay pedidos; slug único; aviso stock bajo.
 
 ## Próximos pasos (orden sugerido)
 
-1. **Admin:** CRUD productos, ajuste de stock, listado de pedidos y estados.
+1. **Admin pedidos:** listado, cambio de estado.
 2. **Tienda pública:** catálogo, ficha producto, carrito (sesión), checkout contraentrega (`payment_method` = `cod`).
-3. Pulido: más CSRF donde falte, mensajes de error, imágenes de producto.
+3. Pulido: más CSRF donde falte, subida de imágenes, mensajes de error.
 
 ## Notas
 
@@ -27,4 +28,4 @@ Pequeño seguimiento de lo implementado y lo pendiente. Actualizar al cerrar cad
 
 ---
 
-*Última actualización: 2026-04-06 — autenticación y panel admin inicial*
+*Última actualización: 2026-04-06 — CRUD productos e inventario en admin*

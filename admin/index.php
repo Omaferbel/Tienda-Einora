@@ -24,7 +24,7 @@ if ($flashErr) {
 ?>
 <p>Panel de administración. Conectado como <strong><?= h($user['email']) ?></strong>.</p>
 <ul>
-    <li>Productos e inventario — <em>próximamente</em></li>
+    <li><a href="/admin/products.php">Productos e inventario</a></li>
     <li>Pedidos — <em>próximamente</em></li>
 </ul>
 <p><a href="/index.php">Volver a la tienda</a></p>
