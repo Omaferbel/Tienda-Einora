@@ -21,6 +21,7 @@ Pequeño seguimiento de lo implementado y lo pendiente. Actualizar al cerrar cad
 
 ## Notas
 
+- **Despliegue con Git:** guía paso a paso en **`GIT-DEPLOY.md`** (GitHub + Hostinger, webhook de auto-despliegue o pull manual). Rama del repo: **`main`**.
 - Credenciales locales: `ssh-credentials.local.txt`, `db-credentials.local.txt` (no versionadas).
 - Si reimportas `schema.sql` entero en una BD ya poblada, puede fallar por tablas existentes o email admin duplicado; en desarrollo suele bastar vaciar tablas o usar BD nueva.
 
