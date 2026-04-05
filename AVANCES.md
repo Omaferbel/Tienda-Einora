@@ -10,7 +10,7 @@ Pequeño seguimiento de lo implementado y lo pendiente. Actualizar al cerrar cad
 - [x] Usuario admin semilla: **admin@einora.com** / **CambiarEstaClave1!** (cambiar tras primer acceso).
 - [x] Configuración local `config.local.php` + plantilla `config/config.example.php`.
 - [x] Conexión PDO (`includes/db.php`) y página de prueba (`index.php`).
-- [x] **Producción einora.com:** `schema.sql` importado en phpMyAdmin; `public_html` con `index.php`, `includes/`, `config/`, `config.local.php`; sitio confirma conexión y **1 usuario** en `users`.
+- [x] **Producción einora.com:** `schema.sql` importado; `public_html` vaciado y Git Hostinger recreado con **Directory** vacío; despliegue desde panel + `config.local.php`; sitio en raíz del dominio.
 
 ## Próximos pasos (orden sugerido)
 

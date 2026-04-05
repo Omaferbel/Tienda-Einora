@@ -35,6 +35,7 @@ try {
         <p>Usuarios en <code>users</code>: <strong><?= htmlspecialchars((string) $userCount, ENT_QUOTES, 'UTF-8') ?></strong></p>
         <p>Siguiente: catálogo público y panel admin (ver <code>AVANCES.md</code>).</p>
         <p><small>Despliegue automático: <code>git push</code> → GitHub → Hostinger.</small></p>
+        <p><small class="ok">Prueba deploy 2026-04-06: si ves esta línea, el último <code>git push</code> llegó al hosting.</small></p>
     <?php else: ?>
         <p class="err">No se pudo conectar a la base de datos.</p>
         <p><small><?= htmlspecialchars($errorMessage ?? '', ENT_QUOTES, 'UTF-8') ?></small></p>
