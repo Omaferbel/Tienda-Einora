@@ -1,0 +1,2 @@
+# Evitar acceso directo por URL a includes/ (Apache 2.4)
+Require all denied
