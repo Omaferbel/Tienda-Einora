@@ -41,7 +41,18 @@ Si GitHub pide usuario/contraseña, usa un **Personal Access Token** como contra
 2. En **Create a New Repository**:
    - **Repository:** la misma URL (`https://github.com/...` para repo público).
    - **Branch:** `main`.
-   - **Directory (opcional):** déjalo vacío para desplegar en **`public_html`** (raíz del sitio).
+   - **Directory (opcional) / Install path:** **déjalo completamente vacío.**
+
+**No escribas `public_html` en ese campo.** Si lo rellenas con `public_html`, Hostinger crea una carpeta **dentro** de la raíz del sitio y el código queda en `public_html/public_html/`. El dominio sigue sirviendo el `index.php` **viejo** de la carpeta de arriba.
+
+### Si ya tienes `public_html/public_html/` (despliegue en la carpeta equivocada)
+
+1. **Respalda** `config.local.php` del nivel correcto (`domains/.../public_html/`).
+2. En el **administrador de archivos**, entra en la carpeta **interior** `public_html` (la que sí se actualiza con Git).
+3. **Mueve** todo su contenido (`index.php`, `includes`, `config`, `.git` si existe, etc.) al **`public_html` de un nivel arriba** (la raíz del sitio). Si pide sobrescribir `index.php`, acepta (el de dentro suele ser el actualizado).
+4. **Borra** la carpeta `public_html` vacía que quedó dentro (solo la interior, no la del dominio).
+5. En hPanel → **GIT**: **borra** el repositorio configurado y **vuelve a crearlo** con el campo **Directory / Install path vacío**, misma URL y rama `main`. Vuelve a configurar el **webhook** en GitHub si Hostinger te da una URL nueva.
+6. Pulsa **Deploy** o haz un `git push` vacío (`git commit --allow-empty -m "redeploy"` y `git push`) para comprobar que ahora actualiza la raíz correcta.
 
 ### Si pide carpeta vacía
 
